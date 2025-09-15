@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戴雨珊 - 运营管理 | 数据增长策略专家</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-text-color: #333333;
+            --background-color: #f5f5f5;
+            --accent-color: #3a506b;
+            --secondary-bg-color: #e0e0e0;
+            --nav-bg-rgba: rgba(245, 245, 245, 0.9);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-text-color);
+            background-color: var(--background-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #5d7e9e; /* Slightly lighter accent for hover */
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg-rgba);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-text-color);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            font-weight: 300;
+            color: var(--primary-text-color);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-text-color);
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px; /* Account for fixed nav */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 600;
+            color: var(--primary-text-color);
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--primary-text-color);
+            margin-bottom: 25px;
+        }
+
+        .hero-philosophy {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-weight: 300;
+            color: #666; /* Slightly lighter for philosophy */
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #5d7e9e;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(4rem, 10vw, 10rem);
+            font-weight: 600;
+            color: var(--primary-text-color);
+            opacity: 0.05;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 500;
+            color: var(--primary-text-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #about .about-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 60px;
+            color: #555;
+        }
+
+        .data-points {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .data-card {
+            background-color: var(--background-color);
+            border: 1px solid var(--accent-color);
+            padding: 30px 40px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 220px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .data-card h3 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: var(--accent-color);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .data-card p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #666;
+        }
+
+        /* Experience Section */
+        #experience .experience-item {
+            margin-bottom: 60px;
+            padding: 40px;
+            background-color: var(--background-color);
+            border-left: 3px solid var(--accent-color);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #experience .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        #experience .experience-date {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: block;
+            position: absolute;
+            left: -150px; /* Positioning for desktop view */
+            top: 40px;
+            width: 120px;
+            text-align: right;
+        }
+
+        #experience .experience-item h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-text-color);
+            margin-bottom: 5px;
+        }
+
+        #experience .experience-item p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #experience .experience-item ul {
+            list-style: disc; /* Use actual disc for achievements */
+            margin-left: 20px;
+        }
+
+        #experience .experience-item ul li {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* Projects Section */
+        #projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: var(--background-color);
+            border: 1px solid var(--secondary-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--primary-text-color);
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .project-card .btn-secondary {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        .project-card .btn-secondary::after {
+            content: '→';
+            margin-left: 8px;
+            transition: margin-left 0.3s ease;
+        }
+        .project-card .btn-secondary:hover::after {
+            margin-left: 12px;
+        }
+
+
+        /* Skills Section */
+        .skills-category {
+            margin-bottom: 40px;
+        }
+
+        .skills-category h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--primary-text-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--secondary-bg-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background-color: var(--secondary-bg-color);
+            color: var(--primary-text-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 300;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        #contact .contact-info {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 2;
+        }
+
+        #contact .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        #contact .social-icons {
+            margin-top: 30px;
+        }
+
+        #contact .social-icons a {
+            font-size: 2rem;
+            margin: 0 15px;
+            color: var(--primary-text-color);
+            transition: color 0.3s ease;
+        }
+
+        #contact .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #eee;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 80px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar .container {
+                flex-wrap: wrap;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--nav-bg-rgba);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-item {
+                margin: 15px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+                padding: 5px;
+                border: 1px solid var(--primary-text-color);
+                border-radius: 3px;
+            }
+            .hamburger i {
+                font-size: 1.2rem;
+            }
+
+            #experience .experience-item {
+                padding: 20px;
+                border-left: none; /* Remove border for mobile */
+            }
+
+            #experience .experience-date {
+                position: static; /* Reset position */
+                text-align: left;
+                margin-bottom: 10px;
+                font-size: 1.2rem;
+                color: var(--primary-text-color);
+                border-bottom: 1px solid var(--secondary-bg-color);
+                padding-bottom: 5px;
+                width: auto;
+            }
+
+            .data-points {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title-bg {
+                font-size: clamp(3rem, 15vw, 6rem);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="navbar-brand">戴雨珊</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home">
+        <h1 class="hero-title">戴雨珊</h1>
+        <p class="hero-subtitle">运营管理 | 数据增长策略专家</p>
+        <p class="hero-philosophy">"用策略照亮数据，以执行驱动增长"</p>
+        <a href="#experience" class="btn-primary">View My Journey</a>
+    </section>
+
+    <section id="about" class="container">
+        <div class="section-title-bg">ABOUT</div>
+        <div class="section-header">
+            <h2>关于我</h2>
+        </div>
+        <div class="about-content">
+            <p class="about-text">
+                我是一位充满热情的运营管理专家，擅长将战略思维与数据驱动方法相结合，以实现卓越的业务增长。
+                我致力于通过跨域协同和深入的痛点洞察，将复杂挑战转化为可衡量的商业成功。
+                我在外贸、电商运营及传媒领域积累了丰富经验，具备将创新理念落地执行的能力。
+            </p>
+            <div class="data-points">
+                <div class="data-card">
+                    <h3>35%</h3>
+                    <p>自然流量增长</p>
+                </div>
+                <div class="data-card">
+                    <h3>¥500K+</h3>
+                    <p>单活动销售额</p>
+                </div>
+                <div class="data-card">
+                    <h3>18%</h3>
+                    <p>运营成本降低</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <div class="section-title-bg">EXPERIENCE</div>
+        <div class="section-header">
+            <h2>专业经历</h2>
+        </div>
+        <div class="experience-list">
+            <div class="experience-item">
+                <span class="experience-date">2024.12 - 2025.08</span>
+                <h3>寐兰家具有限公司</h3>
+                <p>运营助理</p>
+                <ul>
+                    <li>**关键词优化:** 分析行业搜索数据，筛选高转化词，重构商品标题及详情页文案，推动搜索排名从TOP50%提升至TOP25%，自然流量增长35%，转化率提升6%。</li>
+                    <li>**618 爆款策略:** 策划"前1小时直降300元+赠乳胶枕"预售，预售订单占比达40%，活动期总销售额突破50万元，单日峰值订单823笔。</li>
+                    <li>**流量闭环设计:** 联动站内外推广，实现站外引流转化率提升25%。</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <span class="experience-date">2023.06 - 2023.08</span>
+                <h3>Limeworks Marketing</h3>
+                <p>电商实习生</p>
+                <ul>
+                    <li>**SEO 策略与流量增长:** 优化高跳出率页面，平均停留时长提升20秒；独立部署50+产品页关键词策略，推动自然流量增长15%及转化率提升3%。</li>
+                    <li>**数据驱动与效能提升:** 分析销售数据与周转率，推动淘汰15%低效SKU；优化物流方案，平均响应时效缩短10%。</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <span class="experience-date">2022.01 - 2022.04</span>
+                <h3>春田柒传媒公司 (宠物行业)</h3>
+                <p>编剧/摄影师/剪辑师</p>
+                <ul>
+                    <li>主导从市场洞察到内容生产，策划“健康养宠”系列短视频，单周播放量破10万，吸引500+点赞，助力小红书粉丝增长30%。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-title-bg">PROJECTS</div>
+        <div class="section-header">
+            <h2>项目亮点</h2>
+        </div>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>英国某品牌烘焙坊的战略经营战略优化</h3>
+                <p>项目负责人</p>
+                <p>成果：线上订单增15%，物流成本降18%，复购率提升12%。</p>
+                <a href="#" class="btn-secondary">Case Study</a>
+            </div>
+            <div class="project-card">
+                <h3>格拉斯哥
